@@ -29,7 +29,7 @@ schema =
         attribute schemaVersion { non-empty-string }?,
         attribute defaultPhase { xsd:IDREF }?,
         attribute queryBinding { non-empty-string }?,
-        (foreign & inclusion* & (title?, ns*, p*, let*, phase*, pattern+, p*, diagnostics?, properties))
+        (foreign & inclusion* & (title?, ns*, p*, let*, phase*, pattern+, p*, diagnostics?, properties?))
     }
 active =
     element active {
