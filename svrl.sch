@@ -123,7 +123,7 @@ AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD."
     <sch:pattern>
         <sch:title>Unique Ids</sch:title>
         <sch:rule context="*[@id]">
-            <sch:assert test="not(preceding::*[@id=current()/@id][1]"> Id attributes
+            <sch:assert test="not(preceding::*[@id=current()/@id][1])"> Id attributes
                 should be unique in a document. </sch:assert>
         </sch:rule>
     </sch:pattern>
