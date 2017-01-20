@@ -1,6 +1,7 @@
-# Copyright (c) ISO/IEC 2015
+﻿
+# Copyright © ISO/IEC 2015
 # The following permission notice and disclaimer shall be included in all
-# copies of this XML schema ("the Schema"), and derivations of the Schema:
+# copies of this XML schema (“the Schema”), and derivations of the Schema:
 # Permission is hereby granted, free of charge in perpetuity, to any
 # person obtaining a copy of the Schema, to use, copy, modify, merge and
 # distribute free of charge, copies of the Schema for the purposes of
@@ -23,176 +24,179 @@ default namespace sch = "http://purl.oclc.org/dsdl/schematron"
 start = schema
 # Element declarations
 schema =
-    element schema {
-        attribute id { xsd:ID }?,
-        rich,
-        attribute schemaVersion { non-empty-string }?,
-        attribute defaultPhase { xsd:IDREF }?,
-        attribute queryBinding { non-empty-string }?,
-        (foreign
+element schema {
+attribute id { xsd:ID }?,
+rich,
+attribute schemaVersion { non-empty-string }?,
+attribute defaultPhase { xsd:IDREF }?,
+attribute queryBinding { non-empty-string }?,
+(foreign
 & inclusion*
-         & (title?, ns*, p*, let*, phase*, pattern+, p*, diagnostics?, properties?))
-    }
+& (title?, ns*, p*, let*, phase*, pattern+, p*, diagnostics?, properties))
+}
 active =
-    element active {
-        attribute pattern { xsd:IDREF },
-        (foreign & (text | dir | emph | span)*)
-    }
+element active {
+attribute pattern { xsd:IDREF },
+(foreign & (text | dir | emph | span)*)
+}
 assert =
-    element assert {
-        attribute test { exprValue },
-        attribute  ag {  agValue }?,
-        attribute id { xsd:ID }?,
-        attribute diagnostics { xsd:IDREFS }?,
-        attribute properties { xsd:IDREFS }?,
-        rich,
-        linkable,
-        (foreign & (text | name | value-of | emph | dir | span)*)
-    }
+element assert {
+attribute test { exprValue },
+attribute flag { flagValue }?,
+attribute id { xsd:ID }?,
+attribute diagnostics { xsd:IDREFS }?,
+attribute properties { xsd:IDREFS }?,
+rich,
+linkable,
+(foreign & (text | name | value-of | emph | dir | span)*)
+}
 diagnostic =
-    element diagnostic {
-        attribute id { xsd:ID },
-        rich,
-        (foreign & (text | value-of | emph | dir | span)*)
-    }
+element diagnostic {
+attribute id { xsd:ID },
+rich,
+(foreign & (text | value-of | emph | dir | span)*)
+}
 diagnostics = element diagnostics { foreign & inclusion* & diagnostic* }
 dir =
-    element dir {
-        attribute value { "ltr" | "rtl" }?,
-        (foreign & text)
-    }
+element dir {
+attribute value { "ltr" | "rtl" }?,
+(foreign & text)
+}
 emph = element emph { text }
 extends =
-    element extends {
-        (attribute rule { xsd:IDREF }
-         | attribute href { uriValue }),
-        foreign-empty
-    }
-let = element let {
-    attribute name { nameValue },
-        (attribute value { string }
-        | foreign-element+)
-    }
+element extends {
+(attribute rule { xsd:IDREF }
+| attribute href { uriValue }),
+foreign-empty
+}
+let =
+element let {
+attribute name { nameValue },
+(attribute value { string }
+| foreign-element+)
+}
 name =
-    element name {
-        attribute path { pathValue }?,
-        foreign-empty
-    } 
-ns = 
-    element ns {
-        attribute uri { uriValue },
-        attribute prefix { nameValue },
-        foreign-empty
-    }
-p =    
-    element p {
-        attribute id { xsd:ID }?,
-        attribute class { classValue }?,
-        attribute icon { uriValue }?,
-        (foreign & (text | dir | emph | span)*)
-    }
+element name {
+attribute path { pathValue }?,
+foreign-empty
+}
+ns =
+element ns {
+attribute uri { uriValue },
+attribute prefix { nameValue },
+foreign-empty
+}
+p =
+element p {
+attribute id { xsd:ID }?,
+attribute class { classValue }?,
+attribute icon { uriValue }?,
+(foreign & (text | dir | emph | span)*)
+}
 param =
-    element param {
-        attribute name { nameValue },
-        attribute value { non-empty-string }
-    }
+element param {
+attribute name { nameValue },
+attribute value { non-empty-string }
+}
 pattern =
-    element pattern {
-        attribute documents { pathValue }?,
-        rich,
-        (foreign
-         & inclusion*
-         & ((attribute abstract { "true" },
-             attribute id { xsd:ID },
-             title?,
-             (p*, let*, rule*))
-            | (attribute abstract { "false" }?,
-               attribute id { xsd:ID }?,
-               title?,
-               (p*, let*, rule*))
-            | (attribute abstract { "false" }?,
-               attribute is-a { xsd:IDREF },
-               attribute id { xsd:ID }?,
-               title?,
-               (p*, param*))))
-    }
+element pattern {
+attribute documents { pathValue }?,
+rich,
+(foreign
+& inclusion*
+& ((attribute abstract { “true” },
+attribute id { xsd:ID },
+title?,
+(p*, let*, rule*))
+| (attribute abstract { "false" }?,
+attribute id { xsd:ID }?,
+title?,
+(p*, let*, rule*))
+| (attribute abstract { "false" }?,
+attribute is-a { xsd:IDREF },
+attribute id { xsd:ID }?,
+title?,
+(p*, param*))))
+}
+﻿
 phase =
-    element phase {
-        attribute id { xsd:ID },
-        rich,
-        (foreign & inclusion* & (p*, let*, active*))
-    }
+element phase {
+attribute id { xsd:ID },
+rich,
+(foreign & inclusion* & (p*, let*, active*))
+}
 properties = element properties { property* }
 property =
-    element property {
-        attribute id { xsd:ID },
-        attribute role { roleValue }?,
-        attribute scheme { text }?,
-        (foreign & (text | name | value-of | emph | dir | span)*)
-    }
+element property {
+attribute id { xsd:ID },
+attribute role { roleValue }?,
+attribute scheme { text }?,
+(foreign & (text | name | value-of | emph | dir | span)*)
+}
 report =
-    element report {
-        attribute test { exprValue },
-        attribute  ag {  agValue }?,
-        attribute id { xsd:ID }?,
-        attribute diagnostics { xsd:IDREFS }?,
-        attribute properties { xsd:IDREFS }?,
-        rich,
-        linkable,
-        (foreign & (text | name | value-of | emph | dir | span)*)
-    }
-rule=
-    element rule {
-        attribute  ag {  agValue }?,
-        rich,
-        linkable,
-        (foreign
-         & inclusion*
-         & ((attribute abstract { "true" },
-             attribute id { xsd:ID },
-             let*,
-             (assert | report | extends | p)+)
-            | (attribute context { pathValue },
-               attribute id { xsd:ID }?,
-               attribute abstract { "false" }?,
-               let*,
-               (assert | report | extends | p)+)))
-    }
+element report {
+attribute test { exprValue },
+attribute flag { flagValue }?,
+attribute id { xsd:ID }?,
+attribute diagnostics { xsd:IDREFS }?,
+attribute properties { xsd:IDREFS }?,
+rich,
+linkable,
+(foreign & (text | name | value-of | emph | dir | span)*)
+}
+rule =
+element rule {
+attribute flag { flagValue }?,
+rich,
+linkable,
+(foreign
+& inclusion*
+& ((attribute abstract { "true" },
+attribute id { xsd:ID },
+let*,
+(assert | report | extends | p)+)
+| (attribute context { pathValue },
+attribute id { xsd:ID }?,
+attribute abstract { "false" }?,
+let*,
+(assert | report | extends | p)+)))
+}
 span =
-    element span {
-        attribute class { classValue },
-        (foreign & text)
-    }
+element span {
+attribute class { classValue },
+(foreign & text)
+}
 title = element title { (text | dir)* }
 value-of =
-    element value-of {
-        attribute select { pathValue },
-        foreign-empty
-    }
+element value-of {
+attribute select { pathValue },
+foreign-empty
+}
 # common declarations
 inclusion =
-    element include {
-        attribute href { uriValue },
-        foreign-empty
-    }
+element include {
+attribute href { uriValue },
+foreign-empty
+}
 rich =
-    attribute icon { uriValue }?,
-    attribute see { uriValue }?,
-    attribute fpi { fpiValue }?,
-    attribute xml:lang { langValue }?,
-    attribute xml:space { "preserve" | "default" }?
+attribute icon { uriValue }?,
+attribute see { uriValue }?,
+attribute fpi { fpiValue }?,
+attribute xml:lang { langValue }?,
+attribute xml:space { "preserve" | "default" }?
 linkable =
-    attribute role { roleValue }?,
-    attribute subject { pathValue }?
+attribute role { roleValue }?,
+attribute subject { pathValue }?
 foreign = foreign-attributes, foreign-element*
 foreign-empty = foreign-attributes
+﻿
 foreign-attributes = attribute * - (local:* | xml:*) { text }*
 foreign-element =
-    element * - sch:* {
-        (attribute * { text }
-         | foreign-element
-         | schema
-         | text)*
+element * - sch:* {
+(attribute * { text }
+| foreign-element
+| schema
+| text)*
 }
 # Data types
 uriValue = xsd:anyURI
@@ -201,7 +205,7 @@ exprValue = string
 fpiValue = string
 langValue = xsd:language
 roleValue = string
- agValue = string
+flagValue = string
 nameValue = string
 # In the default query language binding, xsd:NCNAME
 classValue = string
