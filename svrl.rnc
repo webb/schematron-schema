@@ -25,109 +25,109 @@
 namespace local = ""
 default namespace svrl = http://purl.oclc.org/dsdl/svrl
 schematron-output =
-element schematron-output {
-attribute title { text }?,
-attribute phase { xsd:NMTOKEN }?,
-attribute schemaVersion { text }?,
-human-text*,
-ns-prefix-in-attribute-values*, 
-(active-pattern,
-(fired-rule, (failed-assert | successful-report)*)+)+
-}
+    element schematron-output {
+        attribute title { text }?,
+        attribute phase { xsd:NMTOKEN }?,
+        attribute schemaVersion { text }?,
+        human-text*,
+        ns-prefix-in-attribute-values*,
+        (active-pattern,
+         (fired-rule, (failed-assert | successful-report)*)+)+
+    }
 # only namespaces from sch:ns need to be reported
 ns-prefix-in-attribute-values =
-element ns-prefix-in-attribute-values {
-attribute prefix { xsd:NMTOKEN },
-attribute uri { text },
-empty
-}
+    element ns-prefix-in-attribute-values {
+        attribute prefix { xsd:NMTOKEN },
+        attribute uri { text },
+        empty
+    }
 # only active patterns are reported
 active-pattern =
-element active-pattern {
-attribute id { xsd:ID }?,
-attribute documents { text }?,
-attribute name { text }?,
-attribute role { xsd:NMTOKEN }?,
-empty
-}
+    element active-pattern {
+        attribute id { xsd:ID }?,
+        attribute documents { text }?,
+        attribute name { text }?,
+        attribute role { xsd:NMTOKEN }?,
+        empty
+    }
 # only rules that are fired are reported,
 fired-rule =
-element fired-rule {
-attribute id { xsd:ID }?,
-attribute name { text }?,
-attribute context { text },
-attribute role { xsd:NMTOKEN }?,
-attribute flag { xsd:NMTOKEN }?,
-empty
-}
+    element fired-rule {
+        attribute id { xsd:ID }?,
+        attribute name { text }?,
+        attribute context { text },
+        attribute role { xsd:NMTOKEN }?,
+        attribute flag { xsd:NMTOKEN }?,
+        empty
+    }
 # only references are reported, not the diagnostic
 diagnostic-reference =
-element diagnostic-reference {
-attribute diagnostic { xsd:NMTOKEN },
-human-text
-}
+    element diagnostic-reference {
+        attribute diagnostic { xsd:NMTOKEN },
+        human-text
+    }
 # only failed assertions are reported
 failed-assert =
-element failed-assert {
-attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
-}
+    element failed-assert {
+        attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
+    }
 # only successful asserts are reported
 successful-report =
-element successful-report {
-attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
-}
+    element successful-report {
+        attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
+    }
 # property-reference
 property-reference =
-element property-reference {
-attribute property { xsd:NMTOKEN },
-attribute role { text }?,
-attribute scheme { text }?,
-human-text
-}
+    element property-reference {
+        attribute property { xsd:NMTOKEN },
+        attribute role { text }?,
+        attribute scheme { text }?,
+        human-text
+    }
 # human text
 human-text =
-element text {
-attribute xml:space { text }?,
-attribute xml:lang { text }?,
-attribute see { text }?,
-attribute icon { text }?,
-attribute fpi { text }?,
-rich-text
-}
+    element text {
+        attribute xml:space { text }?,
+        attribute xml:lang { text }?,
+        attribute see { text }?,
+        attribute icon { text }?,
+        attribute fpi { text }?,
+        rich-text
+    }
 # rich text
 rich-text = (foreign | dir | span | emph | text)*
 # directionality
 dir =
-element dir {
-attribute class { text }?,
-attribute dir { text }?,
-text
-}
+    element dir {
+        attribute class { text }?,
+        attribute dir { text }?,
+        text
+    }
 # emphasis
 emph =
-element emph {
-attribute class { text }?,
-text
-}
+    element emph {
+        attribute class { text }?,
+        text
+    }
 # arbitrary markup
 span =
-element span {
-attribute class { text },
-text
-}
+    element span {
+        attribute class { text },
+        text
+    }
 # foreign
 foreign = foreign-attributes | foreign-element
 foreign-attributes = attribute * - (xml:* | local:*) { text }*
 foreign-element =
-element * - svrl:* {
-(attribute * { text }
-| foreign-element
-| text)*
-}
+    element * - svrl:* {
+        (attribute * { text }
+         | foreign-element
+         | text)*
+    }
 attlist.assert-and-report =
-attribute id { xsd:ID }?,
-attribute location { text },
-attribute test { text },
-attribute role { xsd:NMTOKEN }?,
-attribute flag { xsd:NMTOKEN }?
-start = schematron-output 
+    attribute id { xsd:ID }?,
+    attribute location { text },
+    attribute test { text },
+    attribute role { xsd:NMTOKEN }?,
+    attribute flag { xsd:NMTOKEN }?
+start = schematron-output
