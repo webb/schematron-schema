@@ -23,7 +23,7 @@
 # "THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/IEC 19757-3,
 # AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD."
 namespace local = ""
-default namespace svrl = http://purl.oclc.org/dsdl/svrl
+default namespace svrl = "http://purl.oclc.org/dsdl/svrl"
 schematron-output =
     element schematron-output {
         attribute title { text }?,
