@@ -32,7 +32,7 @@ schematron-output =
         human-text*,
         ns-prefix-in-attribute-values*,
         (active-pattern,
-         (fired-rule, (failed-assert | successful-report)*)+)+
+         (fired-rule, (failed-assert | successful-report)*)*)+
     }
 # only namespaces from sch:ns need to be reported
 ns-prefix-in-attribute-values =
@@ -45,7 +45,7 @@ ns-prefix-in-attribute-values =
 active-pattern =
     element active-pattern {
         attribute id { xsd:ID }?,
-        attribute documents { text }?,
+        attribute document { text }?,
         attribute name { text }?,
         attribute role { xsd:NMTOKEN }?,
         empty
@@ -69,12 +69,16 @@ diagnostic-reference =
 # only failed assertions are reported
 failed-assert =
     element failed-assert {
-        attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
+        attlist.assert-and-report, diagnostic-reference*, property-reference*,
+        foreign-attributes,
+        human-text
     }
 # only successful asserts are reported
 successful-report =
     element successful-report {
-        attlist.assert-and-report, diagnostic-reference*, property-reference*, human-text
+        attlist.assert-and-report, diagnostic-reference*, property-reference*,
+        foreign-attributes,
+        human-text
     }
 # property-reference
 property-reference =
